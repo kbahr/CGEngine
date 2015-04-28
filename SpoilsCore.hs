@@ -1,5 +1,8 @@
 module SpoilsCore where
 
+  class Named n where
+    myName :: n a -> String
+
   class ContainsPlayer c where
     getPlayer :: (Player p) => c p -> p
     getPlayerId :: (Player p) => c p -> String
@@ -21,11 +24,11 @@ module SpoilsCore where
   class MacroType a where
     macroType :: a -> String
 
-  class Card a where
-    card :: a -> String
+  class (ContainsType a) => Card a where
+    card :: a x -> String
     --visible :: (Player p) => a -> p -> Bool
-    cardType :: (MacroType t) => a -> t
-    owner :: (Player p) => a -> p
+    cardType :: (MacroType t) => a t -> t
+    owner :: (Player p) => a x -> p
 
   class (Card a) => InPlayCard a where
     currentRole :: (Role r) => a -> r
