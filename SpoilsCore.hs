@@ -18,21 +18,21 @@ module SpoilsCore where
   class Role a where
     role :: a -> String
 
-  class ContainsType t where
-    getType :: t m -> m
+  class ContainsType a where
+    getType :: a t -> t
 
   class MacroType a where
     macroType :: a -> String
 
-  class (ContainsType a) => Card a where
-    card :: a x -> String
+  class Card a where
+    card :: a x x1 -> String
     --visible :: (Player p) => a -> p -> Bool
-    cardType :: (MacroType t) => a t -> t
-    owner :: (Player p) => a x -> p
+    cardType :: (MacroType t) => a p t -> t
+    owner :: (Player p) => a p t -> p
 
-  class (Card a) => InPlayCard a where
-    currentRole :: (Role r) => a -> r
-    controller :: (Player p) => a -> p
+  class InPlay a where
+    currentRole :: (Role r) => a p r -> r
+    controller :: (Player p) => a p r -> p
 
   class Action a where
     action :: a -> String
