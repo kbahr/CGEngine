@@ -12,8 +12,11 @@ module SpoilsCore where
     getId :: a -> String
 
   class GameArea a where
-    gameArea :: (GameArea a) => a -> String
-    normallyVisible :: (Player p) => a -> p -> Bool
+    gameArea :: (GameArea a) => a x x1 x2 -> String
+    normallyVisible :: (Player p) => a x x1 x2 -> p -> Bool
+    getAllCards :: (Card c, Player p, MacroType t) => a p c t -> [c p t]
+    getCards :: (Card c, Player p, MacroType t) => a p c t -> (c p t -> Bool) -> [c p t]
+    putCard :: (Card c, Player p, MacroType t) => a p c t -> c p t -> a p c t
 
   class Role a where
     role :: a -> String
@@ -30,9 +33,9 @@ module SpoilsCore where
     cardType :: (MacroType t) => a p t -> t
     owner :: (Player p) => a p t -> p
 
-  class InPlay a where
-    currentRole :: (Role r) => a p r -> r
-    controller :: (Player p) => a p r -> p
+  --class InPlay a where
+  --  currentRole :: (Role r) => a p r -> r
+  --  controller :: (Player p) => a p r -> p
 
   class Action a where
     action :: a -> String

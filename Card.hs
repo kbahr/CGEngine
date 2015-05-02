@@ -3,17 +3,6 @@ module Card where
   import SpoilsCore
   import Player
 
-  --class Card a where
-  --  card :: a -> String
-  --  visible :: (Player p) => a -> p -> Bool
-  --  currentRole :: (Role r) => a -> r
-  --  cardType :: (MacroType t) => a -> t
-  --  owner :: (Player p) => a -> p
-  --  controller :: (Player p) => a -> p
-
-  --Cards always have an owner, can always be (in)visible, always have a card type
-  --Controller only applies in play, current role is...?
-
   data OwnedCard p where
     MkOwnedCard :: (Player p) => String -> p -> OwnedCard p
 
@@ -48,6 +37,6 @@ module Card where
   instance Show (PlayedCard c t p r) where
     show (MkPlayedCard c _ _) = card c
 
-  instance (MacroType t, Card c) => InPlay (PlayedCard c t) where
-    currentRole (MkPlayedCard _ _ r) = r
-    controller (MkPlayedCard _ p _) = p
+  --instance (MacroType t, Card c) => InPlay (PlayedCard c t) where
+  --  currentRole (MkPlayedCard _ _ r) = r
+  --  controller (MkPlayedCard _ p _) = p
